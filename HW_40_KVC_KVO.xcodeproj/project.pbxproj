@@ -14,6 +14,7 @@
 		6C72E8B71B64FEB1001E40C3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C72E8B61B64FEB1001E40C3 /* Images.xcassets */; };
 		6C72E8BA1B64FEB1001E40C3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C72E8B81B64FEB1001E40C3 /* LaunchScreen.xib */; };
 		6C72E8C61B64FEB2001E40C3 /* HW_40_KVC_KVOTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C72E8C51B64FEB2001E40C3 /* HW_40_KVC_KVOTests.m */; };
+		6C72E8D01B64FFCC001E40C3 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 6C72E8CF1B64FFCC001E40C3 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		6C72E8BF1B64FEB2001E40C3 /* HW_40_KVC_KVOTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HW_40_KVC_KVOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C72E8C41B64FEB2001E40C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C72E8C51B64FEB2001E40C3 /* HW_40_KVC_KVOTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HW_40_KVC_KVOTests.m; sourceTree = "<group>"; };
+		6C72E8CF1B64FFCC001E40C3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 		6C72E8A81B64FEB1001E40C3 /* HW_40_KVC_KVO */ = {
 			isa = PBXGroup;
 			children = (
+				6C72E8CF1B64FFCC001E40C3 /* README.md */,
 				6C72E8AD1B64FEB1001E40C3 /* AppDelegate.h */,
 				6C72E8AE1B64FEB1001E40C3 /* AppDelegate.m */,
 				6C72E8B01B64FEB1001E40C3 /* ViewController.h */,
@@ -221,6 +224,7 @@
 			files = (
 				6C72E8B21B64FEB1001E40C3 /* ViewController.m in Sources */,
 				6C72E8AF1B64FEB1001E40C3 /* AppDelegate.m in Sources */,
+				6C72E8D01B64FFCC001E40C3 /* README.md in Sources */,
 				6C72E8AC1B64FEB1001E40C3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
