@@ -81,7 +81,7 @@
 
 
 - (IBAction)lastNameFieldAction:(UITextField*)sender {
-    [self.currentStudent setValue:sender.text forKey:@"lastName"];
+     [self.currentStudent setValue:sender.text forKey:@"lastName"];
 
 }
 
