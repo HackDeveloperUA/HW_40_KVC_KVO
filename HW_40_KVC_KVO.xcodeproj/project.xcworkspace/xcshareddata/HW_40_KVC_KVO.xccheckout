@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D0F58FBB-5644-4AEB-8F15-5E501E6EDA0A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>HW_40_KVC_KVO</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C3511CB0498E9533D8189406F98F3463218F38DC</key>
+		<string>https://github.com/HackDeveloperUA/Lesson40.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>HW_40_KVC_KVO.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C3511CB0498E9533D8189406F98F3463218F38DC</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/HackDeveloperUA/Lesson40.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C3511CB0498E9533D8189406F98F3463218F38DC</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C3511CB0498E9533D8189406F98F3463218F38DC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>HW_40_KVC_KVO</string>
+		</dict>
+	</array>
+</dict>
+</plist>
