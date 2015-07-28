@@ -23,6 +23,8 @@
 - (IBAction)firstNameFieldAction:(UITextField*)sender;
 - (IBAction)lastNameFieldAction:(UITextField*)sender;
 - (IBAction)genderSegmentAction:(UISegmentedControl*)sender;
+
 - (IBAction)refreshBarButtonAction:(id)sender;
+- (IBAction)removeAllProperty:(id)sender;
 
 @end

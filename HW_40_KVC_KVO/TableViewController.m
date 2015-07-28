@@ -27,11 +27,16 @@
     
     for (int i=0; i<10; i++) {
         ASStudent* student = [[ASStudent alloc] init];
+        
         [tmp addObject:student];
     }
-    
+
+
     self.arrayStudents = tmp;
-    [self refreshTableView:self.arrayStudents];
+        
+    [self addObserver:self forKeyPath:@"currentStudent"
+              options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+              context:nil];
     
     
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -44,12 +49,46 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Refresh
 
--(void) refreshTableView:(NSMutableArray*)array{
+#pragma mark - Observer
+
+-(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    NSLog(@"\n\n\nobserveValueForKeyPath: %@\nofObject: %@\nchange: %@", keyPath, object, change);
+    
+}
+
+
+- (void) addPropertyToObserver:(id)sender forKeyPath:(NSString *)keyPath {
+    
+    [sender addObserver:self
+             forKeyPath:keyPath
+                options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                context:NULL];
+    
+}
+
+- (void) removePropertyToObserver:(id)sender forKeyPath:(NSString *)keyPath
+{
+    [sender removeObserver:self forKeyPath:keyPath];
+}
+
+
+
+-(void) setValue:(id)value forUndefinedKey:(NSString *)key {
+    
+    NSLog(@"Пошел нахуй");
+}
+
+
+
+
+#pragma mark - Method For Bar Button
+
+-(void) refreshTableViewFromArray:(NSMutableArray*)array{
     
     int randomNumber = arc4random()%[array count];
-    NSLog(@"x = %d | %d",randomNumber, [array count]);
+
     ASStudent* obj   = [array objectAtIndex:randomNumber];
     
     self.firstNameField.text = [obj valueForKey:@"firstName"];
@@ -60,42 +99,70 @@
     self.dateOfBirthLabel.text              = [obj valueForKey:@"dateOfBirth"];
     self.gradeLabel.text                    = [NSString stringWithFormat:@"%.2f",[[obj valueForKey:@"grade"] floatValue]];
     
-    self.currentStudent = obj;
+   self.currentStudent = obj;
 }
 
 
--(void) setValue:(id)value forUndefinedKey:(NSString *)key {
+-(void) refreshTableViewFromObject:(ASStudent*)student{
     
-    NSLog(@"Пошел нахуй");
+    self.firstNameField.text = [student valueForKey:@"firstName"];
+    self.lastNameField.text  = [student valueForKey:@"lastName"];
+    
+    
+    self.genderSegment.selectedSegmentIndex = [[student valueForKey:@"gender"]intValue];
+    self.dateOfBirthLabel.text              = [student valueForKey:@"dateOfBirth"];
+    self.gradeLabel.text                    = [NSString stringWithFormat:@"%.2f",[[student valueForKey:@"grade"] floatValue]];
+    
 }
+
+
 
 #pragma mark - Action
 
 
 - (IBAction)firstNameFieldAction:(UITextField*)sender {
     
-    [self.currentStudent setValue:sender.text forKey:@"firstName"];
+    [self addPropertyToObserver:self.currentStudent forKeyPath:@"firstName"];
+     _currentStudent.firstName = sender.text;
+    [self removePropertyToObserver:self.currentStudent forKeyPath:@"firstName"];
     
 }
 
 
 
 - (IBAction)lastNameFieldAction:(UITextField*)sender {
-     [self.currentStudent setValue:sender.text forKey:@"lastName"];
+    
+    [self addPropertyToObserver:self.currentStudent forKeyPath:@"lastName"];
+    _currentStudent.lastName = sender.text;
+    [self removePropertyToObserver:self.currentStudent forKeyPath:@"lastName"];
+
 
 }
 
 - (IBAction)genderSegmentAction:(UISegmentedControl*)sender {
-    [self.currentStudent setValue:@(sender.selectedSegmentIndex) forKey:@"gender"];
+    
+    [self addPropertyToObserver:self.currentStudent forKeyPath:@"gender"];
+    _currentStudent.gender = sender.selectedSegmentIndex;
+    [self removePropertyToObserver:self.currentStudent forKeyPath:@"gender"];
+
 
 }
+
+#pragma mark - Action Bar Button
 
 
 - (IBAction)refreshBarButtonAction:(id)sender {
-    [self refreshTableView:self.arrayStudents];
-    //[self.tableView reloadData];
+    [self refreshTableViewFromArray:self.arrayStudents];
 
 }
+
+- (IBAction)removeAllProperty:(id)sender {
+
+    [self.currentStudent removeHardCoreProperty];
+    [self refreshTableViewFromObject:self.currentStudent];
+}
+
+
 
 #pragma mark - Hide Keyboard Methods
 

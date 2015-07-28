@@ -143,6 +143,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="KVC / KVO" id="IU3-n9-zWL">
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="QPR-Zf-emC">
+                            <connections>
+                                <action selector="removeAllProperty:" destination="abP-lg-GD0" id="eKl-R2-3gb"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="refresh" id="YCW-Bb-aI7">
                             <connections>
                                 <action selector="refreshBarButtonAction:" destination="abP-lg-GD0" id="w1M-WZ-wSz"/>

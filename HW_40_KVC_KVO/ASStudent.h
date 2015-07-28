@@ -19,6 +19,6 @@
 @property (assign, nonatomic) NSInteger gender;
 @property (assign, nonatomic) float     grade;
 
-
+-(void) removeHardCoreProperty;
 
 @end
