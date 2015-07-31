@@ -23,77 +23,32 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    NSMutableArray* tmp = [[NSMutableArray alloc] init];
+    NSMutableArray* allStudents = [[NSMutableArray alloc] init];
 
     
-    NSInteger randomIndex = arc4random() % 5;
     
     // create student
-    for (int i=0; i<=10; i++) {
+    for (int i=0; i<=15; i++) {
         ASStudent* student = [[ASStudent alloc] init];
-        [tmp addObject:student];
+        [allStudents addObject:student];
        
-        if (i == randomIndex) {
-            [student addObserver:self forKeyPath:@"firstName"
-                         options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
-                         context:nil];
-            
-            NSLog(@"Я тот избранный ! %@",[student description]);
-        }
     }
 
+    NSMutableArray* arrayNames = [allStudents valueForKeyPath:@"@distinctUnionOfObjects.firstName"];
+    NSNumber* minAge = [allStudents valueForKeyPath:@"@min.dateOfBirth"];
+    NSNumber* maxAge = [allStudents valueForKeyPath:@"@max.dateOfBirth"];
 
-    NSLog(@"\n\n\n -------ОБЩИЙ СПИСОК СТУДЕНТОВ--------  \n");
-    [self printAllStudents:tmp];
-    NSLog(@" -----------------------------  \n\n\n");
+    NSNumber* sumAllGrade  = [allStudents valueForKeyPath:@"@max.grade"];
+    NSNumber* averageGrade = [allStudents valueForKeyPath:@"@avg.grade"];
     
+    NSLog(@"Array Names = %@",arrayNames);
     
-    
-    
-    // add friends
-    NSLog(@" ----------ДОБАВЛЯЕМ ДРУЗЕЙ--------- \n");
-    for (ASStudent* obj in tmp) {
-        
-        NSInteger index = [tmp indexOfObject:obj];
-        
-        if (index != [tmp count]-1) {
-            
-            ASStudent* himFriend = [tmp objectAtIndex:index+1];
-            [obj setValue:himFriend forKeyPath:@"friend"];
-        } else {
-            ASStudent* himFriend = [tmp firstObject];
-            [obj setValue:himFriend forKeyPath:@"friend"];
-        }
-    }
-    NSLog(@" -----------------------------  \n\n\n");
+    NSLog(@"minAge = %@",minAge);
+    NSLog(@"maxAge = %@",maxAge);
 
-    
-    
-    
-    
-    
-    
-    NSLog(@"Я избранный MyName = %@  Friend Name = %@",[[tmp objectAtIndex:randomIndex]firstName],
-                                                       [[tmp objectAtIndex:randomIndex] valueForKeyPath:@"friend.firstName"]);
-    
-    NSLog(@"\n -----------------------------  \n\n\n");
+    NSLog(@"sumAllGrade = %@",sumAllGrade);
+    NSLog(@"averageGrade = %@",averageGrade);
 
-    
-    
-    // change name
-    NSLog(@"\n\n\n -------МЕНЯЕМ ИМЯ--------  \n");
-  
-    for (ASStudent* obj in tmp) {
-        
-        obj.firstName = @"Any Name";
-        [obj setValue:@" Any Friend Name !" forKeyPath:@"friend.firstName"];
-    }
-    
-    
-    NSLog(@"\n\n\n -------ОБЩИЙ СПИСОК СТУДЕНТОВ--------  \n");
-    [self printAllStudents:tmp];
-    
-    [[tmp objectAtIndex:randomIndex] removeObserver:self forKeyPath:@"firstName"];
 
     return YES;
 }
@@ -106,11 +61,6 @@
     
 }
 
--(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    
-    NSLog(@"\n\n\nobserveValueForKeyPath: %@\nofObject: %@\nchange: %@", keyPath, object, change);
-    
-}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
