@@ -19,6 +19,9 @@
 @property (assign, nonatomic) NSInteger gender;
 @property (assign, nonatomic) float     grade;
 
+
+@property (weak, nonatomic) ASStudent* friend;
+
 -(void) removeHardCoreProperty;
 
 @end

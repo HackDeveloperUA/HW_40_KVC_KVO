@@ -13,9 +13,7 @@
 
 -(instancetype) init {
     
-    
     self = [super init];
-    
     if (self) {
         
         ASNameFamalyAndImage* baseInitials = [[ASNameFamalyAndImage alloc] init];
@@ -59,15 +57,18 @@
         [self addObserver:self forKeyPath:@"lastName"
                   options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                   context:nil];
+        [self addObserver:self forKeyPath:@"dateOfBirth"
+                  options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                  context:nil];
+        
         [self addObserver:self forKeyPath:@"gender"
                   options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                   context:nil];
+        [self addObserver:self forKeyPath:@"grade"
+                  options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                  context:nil];*/
 
-        */
-        
     }
-   
-    
     
    return self;
 }
@@ -76,32 +77,9 @@
 
 #pragma mark - Setters
 
-/*
--(void) setFirstName:(NSString *)firstName {
-    
-    _firstName = firstName;
-    NSLog(@"Student setFirstName: %@", firstName);
-
-}
-
--(void) setLastName:(NSString *)lastName {
-    
-    _lastName = lastName;
-    NSLog(@"Student setLastName: %@", lastName);
-
-}
-
-
--(void) setGender:(NSInteger)gender {
-    
-    _gender = gender;
-    NSLog(@"Student setGender: %d", gender);
-}
-*/
-
 
 - (NSString*) description {
-    return [NSString stringWithFormat:@"Student: %@ %@", self.firstName, self.lastName];
+    return [NSString stringWithFormat:@"|Student: %@ %@|", self.firstName, self.lastName];
 }
 
 
@@ -125,15 +103,11 @@
     return nil;
 }
 
-- (void) changeName {
-    
-   // [self willChangeValueForKey:@"name"];
-   // _name = @"FakeName";
-   //[self didChangeValueForKey:@"name"];
-}
+
 
 -(void) removeHardCoreProperty {
     
+    NSLog(@"\n\n\nTHHHHHHIIIIIIISSSSSSSS    NIl !!!!!!!\n\n\n");
     
     [self willChangeValueForKey:@"firstName"];
     [self willChangeValueForKey:@"lastName"];
@@ -154,6 +128,12 @@
     [self didChangeValueForKey:@"gender"];
     [self didChangeValueForKey:@"grade"];
 
+    
+}
+
+-(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    NSLog(@"\n\n\nobserveValueForKeyPath: %@\nofObject: %@\nchange: %@", keyPath, object, change);
     
 }
 

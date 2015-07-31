@@ -7,8 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import "ASStudent.h"
+#import "ASNameFamalyAndImage.h"
+
 
 @interface AppDelegate ()
+
+@property (strong, nonatomic) NSMutableArray* arrayStudents;
+@property (strong, nonatomic) ASStudent* currentStudent;
 
 @end
 
@@ -16,8 +22,94 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+
+    NSMutableArray* tmp = [[NSMutableArray alloc] init];
+
+    
+    NSInteger randomIndex = arc4random() % 5;
+    
+    // create student
+    for (int i=0; i<=10; i++) {
+        ASStudent* student = [[ASStudent alloc] init];
+        [tmp addObject:student];
+       
+        if (i == randomIndex) {
+            [student addObserver:self forKeyPath:@"firstName"
+                         options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                         context:nil];
+            
+            NSLog(@"Я тот избранный ! %@",[student description]);
+        }
+    }
+
+
+    NSLog(@"\n\n\n -------ОБЩИЙ СПИСОК СТУДЕНТОВ--------  \n");
+    [self printAllStudents:tmp];
+    NSLog(@" -----------------------------  \n\n\n");
+    
+    
+    
+    
+    // add friends
+    NSLog(@" ----------ДОБАВЛЯЕМ ДРУЗЕЙ--------- \n");
+    for (ASStudent* obj in tmp) {
+        
+        NSInteger index = [tmp indexOfObject:obj];
+        
+        if (index != [tmp count]-1) {
+            
+            ASStudent* himFriend = [tmp objectAtIndex:index+1];
+            [obj setValue:himFriend forKeyPath:@"friend"];
+        } else {
+            ASStudent* himFriend = [tmp firstObject];
+            [obj setValue:himFriend forKeyPath:@"friend"];
+        }
+    }
+    NSLog(@" -----------------------------  \n\n\n");
+
+    
+    
+    
+    
+    
+    
+    NSLog(@"Я избранный MyName = %@  Friend Name = %@",[[tmp objectAtIndex:randomIndex]firstName],
+                                                       [[tmp objectAtIndex:randomIndex] valueForKeyPath:@"friend.firstName"]);
+    
+    NSLog(@"\n -----------------------------  \n\n\n");
+
+    
+    
+    // change name
+    NSLog(@"\n\n\n -------МЕНЯЕМ ИМЯ--------  \n");
+  
+    for (ASStudent* obj in tmp) {
+        
+        obj.firstName = @"Any Name";
+        [obj setValue:@" Any Friend Name !" forKeyPath:@"friend.firstName"];
+    }
+    
+    
+    NSLog(@"\n\n\n -------ОБЩИЙ СПИСОК СТУДЕНТОВ--------  \n");
+    [self printAllStudents:tmp];
+    
+    [[tmp objectAtIndex:randomIndex] removeObserver:self forKeyPath:@"firstName"];
+
     return YES;
+}
+
+-(void) printAllStudents:(NSArray*) array {
+    
+    for (ASStudent* obj in array) {
+        NSLog(@"%@",[obj description]);
+    }
+    
+}
+
+-(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    NSLog(@"\n\n\nobserveValueForKeyPath: %@\nofObject: %@\nchange: %@", keyPath, object, change);
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
